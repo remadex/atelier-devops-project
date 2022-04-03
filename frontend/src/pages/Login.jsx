@@ -10,24 +10,24 @@ import * as Yup from 'yup';
 
 const Login = () => {
   const loggedIn = async ({ username, password }) => {
-    const result = await fetch('https://localhost:8443/api/auth/signin', {
+    const result = await fetch('http://localhost:8443/api/auth/signin', {
       method: 'PUT',
-      mode: 'cors',
       headers: {
-        'Access-Control-Allow-Origin':'*'
+        'Content-Type': 'application/json',
       },
-      body: {
+      body: JSON.stringify({
         username: 'test123',
-        password: 'bidule'
-      }
-    })
-    console.log(result);
+        password: 'bidule',
+      }),
+    });
+    const res = await result.json();
+    console.log(res);
   };
 
   const formik = useFormik({
     initialValues: {
-      username: '',
-      password: '',
+      username: 'test123',
+      password: 'bidule',
     },
     validationSchema: Yup.object({
       username: Yup.string().required("Le nom d'utilisateur est requis"),
