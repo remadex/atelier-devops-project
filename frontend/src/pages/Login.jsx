@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable react/no-unescaped-entities */
@@ -5,26 +6,42 @@
 
 import { useFormik } from 'formik';
 // import toast from "react-hot-toast";
+
 import { NavLink } from 'react-router-dom';
 import * as Yup from 'yup';
+import axios from 'axios';
+
 
 const Login = () => {
   const loggedIn = async ({ username, password }) => {
-    const result = await fetch('http://localhost:8443/api/auth/signin', {
-      method: 'PUT',
-      credentials: 'same-origin',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: 'test123',
-        password: 'bidule',
-      }),
-    });
-    console.log(await result.headers.entries());
-    const res = await result.json();
-    console.log(res);
+    
+  //   const result = await fetch('http://localhost:8443/api/auth/signin', {
+  //     method: 'PUT',
+  //     credentials: 'same-origin',
+  //     // mode: { mode: 'no-cors' },
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       username: 'test123',
+  //       password: 'bidule',
+  //     }),
+  //   });
+  //   for (const pair of result.headers.entries()) {
+  //     console.log(`${pair[0] }: ${ pair[1]}`);
+  //  }
+  //   const res = await result.json();
+  //   console.log(res);
+
+  axios.put('http://localhost:8443/api/auth/signin', JSON.stringify({
+          username: 'test123',
+          password: 'bidule',
+        }), {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}).then(({data})=> console.log(data));
   };
 
   const formik = useFormik({
