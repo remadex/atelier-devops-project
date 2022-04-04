@@ -1,47 +1,34 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 
 import { useFormik } from 'formik';
-// import toast from "react-hot-toast";
+import toast from 'react-hot-toast';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import axios from 'axios';
-
 
 const Login = () => {
+  const navigate = useNavigate();
   const loggedIn = async ({ username, password }) => {
-    
-  //   const result = await fetch('http://localhost:8443/api/auth/signin', {
-  //     method: 'PUT',
-  //     credentials: 'same-origin',
-  //     // mode: { mode: 'no-cors' },
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       username: 'test123',
-  //       password: 'bidule',
-  //     }),
-  //   });
-  //   for (const pair of result.headers.entries()) {
-  //     console.log(`${pair[0] }: ${ pair[1]}`);
-  //  }
-  //   const res = await result.json();
-  //   console.log(res);
-
-  axios.put('http://localhost:8443/api/auth/signin', JSON.stringify({
-          username: 'test123',
-          password: 'bidule',
-        }), {
-  headers: {
-    'Content-Type': 'application/json'
-  }
-}).then(({data})=> console.log(data));
+    const result = await fetch('http://localhost:8443/api/auth/signin', {
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    });
+    if (result.status === 200) {
+      toast.success('Connecté');
+      navigate('/');
+    } else {
+      toast.error("Le nom d'utilisateur/mot de passe n'est pas correct");
+    }
   };
 
   const formik = useFormik({
