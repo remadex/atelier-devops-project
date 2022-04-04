@@ -10,8 +10,3 @@ services:
       MYSQL_DATABASE: testdb
     ports:
       - "3306:3306"
-
-  admin:
-    image: adminer
-    ports:
-      - "8080:8080"
