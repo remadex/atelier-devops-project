@@ -12,7 +12,9 @@ const Login = () => {
   const loggedIn = async ({ username, password }) => {
     const result = await fetch('http://localhost:8443/api/auth/signin', {
       method: 'PUT',
+      credentials: 'same-origin',
       headers: {
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -20,6 +22,7 @@ const Login = () => {
         password: 'bidule',
       }),
     });
+    console.log(await result.headers.entries());
     const res = await result.json();
     console.log(res);
   };

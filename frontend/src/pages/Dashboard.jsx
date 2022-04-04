@@ -1,8 +1,26 @@
+/* eslint-disable no-undef */
+import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
-const Dashboard = () => (
-  <div>
+const Dashboard = () => {
+  useEffect(() => {
+    const checkOk = async() => {
+      const result = await fetch('http://localhost:8443/api/test/user', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'same-origin'
+    });
+    const res = await result.json();
+    console.log(res);
+    }
+
+    checkOk()
+  }, [])
+
+  return (<div>
     <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
       <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white">
         <div className="flex-1 flex flex-col pb-4 overflow-y-auto">
@@ -114,6 +132,6 @@ const Dashboard = () => (
       </main>
     </div>
   </div>
-);
+)};
 
 export default Dashboard;
