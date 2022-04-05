@@ -1,8 +1,6 @@
-/* eslint-disable no-undef */
 import toast from 'react-hot-toast';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
-/* eslint-disable jsx-a11y/anchor-is-valid */
 const Dashboard = () => {
   const navigate = useNavigate();
   const logOut = async () => {
@@ -16,22 +14,6 @@ const Dashboard = () => {
     toast.success('Déconnecté');
     navigate('/login');
   };
-  // useEffect(() => {
-  //   const checkOk = async () => {
-  //     const result = await fetch('http://localhost:8443/api/test/user', {
-  //       method: 'GET',
-  //       credentials: 'include',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     const res = await result.text();
-  //     console.log(res);
-  //   };
-
-  //   checkOk();
-  // }, []);
-
   return (
     <div>
       <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">

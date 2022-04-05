@@ -10,11 +10,7 @@
     "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" "
   },
   "dependencies": {
-    "axios": "^0.26.1",
-    "cross-fetch": "^3.1.5",
-    "js-cookie": "^3.0.1",
     "react": "^17.0.2",
-    "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
